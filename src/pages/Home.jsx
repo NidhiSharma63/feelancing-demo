@@ -72,7 +72,7 @@ const Home = () => {
         ref={whiteScreenRef}
         className="absolute w-[100%] h-[10px] bg-white bottom-0 z-[2] overflow-hidden"
       />
-      <div className="flex flex-col gap-3 w-1/2  mt-40 ml-20 pb-10 justify-around border-2 border-amber-400">
+      <div className="flex overflow-hidden flex-col gap-3 w-1/2  mt-40 ml-20 pb-10 justify-around border-2 border-amber-400">
         <h1 className="text-4xl font-bold">GENTHERM</h1>
         <div className="text-8xl ">
           <p>Technology</p>
@@ -86,7 +86,7 @@ const Home = () => {
             Explore by
             <div
               ref={solutionRef}
-              className="absolute  bg-green-700  z-[-1]  w-[200px] h-[68px] top-[80.3%]"
+              className="absolute overflow-hidden bg-green-700  z-[-1]  w-[200px] h-[68px] top-[80.3%]"
             />
             <hr className="text-green-700" />
             <p className="text-xl relative" ref={buttonRefFirst}>
@@ -100,7 +100,7 @@ const Home = () => {
             Explore by
             <div
               ref={productRef}
-              className="absolute  bg-green-700  z-[-1]  w-[200px] h-[68px] top-[80.3%]"
+              className="absolute overflow-hidden  bg-green-700  z-[-1]  w-[200px] h-[68px] top-[80.3%]"
             />
             <hr className="text-green-700" />
             <p className="text-xl relative" ref={buttonRefSecond}>
