@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import React, { useRef } from "react";
+import { useNavigate } from "react-router";
 
 const Home = () => {
   const solutionRef = useRef(null);
@@ -10,6 +11,7 @@ const Home = () => {
 
   const whiteScreenRef = useRef(null);
 
+  const navigate = useNavigate();
   const handleExpand = (ref) => {
     const tl = gsap.timeline();
 
@@ -54,7 +56,10 @@ const Home = () => {
         duration: 1,
         ease: "expo.inOut",
         zIndex: 2,
-        top:0
+        top:0,
+        onComplete: () => {
+          navigate("/solution");
+        }
       },
       "-=0.1" // green expand ke saath hi start ho jaye
     );
