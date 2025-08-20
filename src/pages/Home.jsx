@@ -1,5 +1,6 @@
 import gsap from "gsap";
-import React,{ useRef } from "react";
+import React, { useRef } from "react";
+
 const Home = () => {
   const solutionRef = useRef(null);
   const productRef = useRef(null);
@@ -8,46 +9,64 @@ const Home = () => {
   const buttonRefSecond = useRef(null);
 
   const whiteScreenRef = useRef(null);
+
   const handleExpand = (ref) => {
-    gsap.to(ref.current, {
-      width: "100vw",
-      height: "100vh",
-      top: 0,
-      left: 0,
-      borderRadius: 0,
-      duration: 1, // 1 second animation
-      ease: "power3.inOut",
-      zIndex: 1,
-      onComplete:()=>{
+    const tl = gsap.timeline();
+
+    // 1. Buttons fade + slide out
+    tl.to([buttonRefFirst.current, buttonRefSecond.current], {
+      opacity: 0,
+      x: 100,
+      duration: 0.6,
+      ease: "power2.inOut",
+      stagger: 0.1,
+      onComplete: () => {
         buttonRefFirst.current.style.display = "none";
         buttonRefSecond.current.style.display = "none";
-        gsap.to(whiteScreenRef.current, {
-          width: "100vw",
-          height: "100vh",
-          top: 0,
-          left: 0,
-          borderRadius: 0,
-          duration: 1, // 1 second animation
-          ease: "power3.inOut",
-          zIndex:2
-        })
-      }
+      },
     });
-    gsap.to(buttonRefFirst.current, {
-      duration: 1, // 1 second animation
-      ease: "power3.inOut",
-      right: "-1000%",
-    });
-    gsap.to(buttonRefSecond.current, {
-       right: "-1000%",
-      duration: 1, // 1 second animation
-      ease: "power3.inOut",
-    });
+
+    // 2. Green block expand
+    tl.to(
+      ref.current,
+      {
+        width: "100vw",
+        height: "100vh",
+        top: 0,
+        left: 0,
+        borderRadius: 0,
+        duration: 1.2,
+        ease: "expo.inOut",
+        zIndex: 1,
+        onComplete: () => {
+          // whiteScreenRef.current.style.zIndex = "2";
+        }
+      },
+      "<" // thoda overlap for smoothness
+    );
+
+    // 3. White screen overlay expand
+    tl.to(
+      whiteScreenRef.current,
+      {
+        height: "100vh",
+        borderRadius: 0,
+        duration: 1,
+        ease: "expo.inOut",
+        zIndex: 2,
+        top:0
+      },
+      "-=0.1" // green expand ke saath hi start ho jaye
+    );
   };
+
   return (
     <div className="flex h-screen overflow-hidden">
       {/* white screen */}
-      <div ref={whiteScreenRef} className="absolute w-[0px] h-[0px] bg-white bottom-0 left-0"/>
+      <div
+        ref={whiteScreenRef}
+        className="absolute w-[100%] h-[10px] bg-white bottom-0 z-[2] overflow-hidden"
+      />
       <div className="flex flex-col gap-3 w-1/2  mt-40 ml-20 pb-10 justify-around border-2 border-amber-400">
         <h1 className="text-4xl font-bold">GENTHERM</h1>
         <div className="text-8xl ">
